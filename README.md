@@ -4,7 +4,7 @@ Downloads NCBI genomes for Mash and puts taxonomic information into the referenc
 ## Usage 
 
 ```sh
-# download all Refseq genomes
+# download all Refseq genomes, build min-hashes (takes days)
 $ perl dl-genomes.pl run
 
 # Combine all archaeal sketches into one pooled sketch
