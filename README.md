@@ -3,7 +3,7 @@ Downloads NCBI genomes for Mash and puts taxonomic information into the referenc
 
 ## Usage 
 
-```
+```sh
 # download all Refseq genomes
 $ perl dl-genomes.pl run
 
@@ -12,24 +12,27 @@ $ mash paste archaea -l <( find sketches-k21s1000/archaea/ -name '*.msh')
 
 # ID field of the sketch contains assembly info, comment contains taxonomy ID
 $ mash info archaea.msh
-Header:
-  Hash function (seed):          MurmurHash3_x64_128 (42)
-  K-mer size:                    21 (64-bit hashes)
-  Alphabet:                      ACGT (canonical)
-  Target min-hashes per sketch:  1000
-  Sketches:                      873
-
-Sketches:
- [Hashes] [Length]  [ID]                                                                                      [Comment]
- 1000     2947156   GCF_003201835.1 Acidianus brierleyi, CompleteGenome assembly [2.95 Mbp, 1 seqs]           taxid 41673
- 1000     2137654   GCF_000213215.1 Acidianus hospitalis W1, CompleteGenome assembly [2.14 Mbp, 1 seqs]       taxid 933801
- 1000     2287077   GCF_003201765.1 Acidianus sulfidivorans JP7, CompleteGenome assembly [2.29 Mbp, 1 seqs]   taxid 619593
+#Header:
+#  Hash function (seed):          MurmurHash3_x64_128 (42)
+#  K-mer size:                    21 (64-bit hashes)
+#  Alphabet:                      ACGT (canonical)
+#  Target min-hashes per sketch:  1000
+#  Sketches:                      873
+#
+#Sketches:
+# [Hashes] [Length]  [ID]                                                                                      [Comment]
+# 1000     2947156   GCF_003201835.1 Acidianus brierleyi, CompleteGenome assembly [2.95 Mbp, 1 seqs]           taxid 41673
+# 1000     2137654   GCF_000213215.1 Acidianus hospitalis W1, CompleteGenome assembly [2.14 Mbp, 1 seqs]       taxid 933801
+# 1000     2287077   GCF_003201765.1 Acidianus sulfidivorans JP7, CompleteGenome assembly [2.29 Mbp, 1 seqs]   taxid 619593
  
-# Create Kraken-style taxonomic report with fbreitwieser/Mash
+# Make a test file
 $ zgrep -h -A1 '^>' genomes/archaea/*/*.gz | grep -v '^--' > archaea-test.fa
+
+# Download NCBI taxonomy
 $ wget ftp://ftp.ncbi.nih.gov/pub/taxonomy/taxdump.tar.gz
 $ tar xvvf taxdump.tar.gz
 
+# Create Kraken-style taxonomic report with fbreitwieser/Mash
 $ mash taxscreen archaea.msh archaea-test.msh
 
 %	hashes	taxHashes	hashesDB	taxHashesDB	taxID	rank	name
